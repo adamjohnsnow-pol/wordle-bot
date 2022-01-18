@@ -8,19 +8,27 @@ import (
 	"wordle-bot/pkg/words"
 )
 
-func PlayGame(target string) structures.Params {
+func PlayGame(target, initial string) structures.Params {
 	result := structures.New()
+	var guess string
+	if initial != "" {
+		guess = initial
+	} else {
+		guess = words.GetAWord(&result)
+	}
+
 	for {
 		result.Turns++
-		guess := words.GetAWord(&result)
 		if guess == "" {
 			break
 		}
 		logic.CompareLetters(guess, target, &result)
+		result.PlayedWords = append(result.PlayedWords, guess)
 		fmt.Println(printEmoji(result.Emoji))
 		if !words.Contains("_", result.Greens) || result.Turns == 6 {
 			break
 		}
+		guess = words.GetAWord(&result)
 	}
 	return result
 }

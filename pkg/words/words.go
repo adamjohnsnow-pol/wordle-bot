@@ -12,7 +12,6 @@ func GetAWord(params *structures.Params) string {
 	candidates := findAllCandidates(*params)
 	if len(candidates) > 0 {
 		word := pickRandomWord(candidates)
-		params.PlayedWords = append(params.PlayedWords, word)
 		return word
 	}
 	return ""
