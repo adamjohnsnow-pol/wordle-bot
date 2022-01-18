@@ -1,4 +1,4 @@
-# wordle-bot
+# WordleBot
 See whether a simple looping algorithm would guess the answer before you did
 
 ### To play
@@ -20,5 +20,5 @@ WordleBot: Tell me the answer first
 WordleBot got:
 X / 6
 ```
-#### Caveat
+#### Todo
 -Not sure if the yellow/grey logic is correct for duplicated letters
