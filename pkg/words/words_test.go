@@ -7,20 +7,9 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func contains(target string, slice []string) bool {
-	for _, word := range slice {
-		if word == target {
-			return true
-		}
-	}
-	return false
-}
-
 func TestGreens(t *testing.T) {
 	p := structures.Params{
-		LetterOne:  "A",
-		LetterTwo:  "",
-		LetterFive: "E",
+		Greens: []string{"A", "_", "_", "_", "E"},
 	}
 	assert.True(t, hasAllGreens("ALIVE", p))
 	assert.False(t, hasAllGreens("BLIVE", p))
@@ -29,11 +18,11 @@ func TestGreens(t *testing.T) {
 
 func TestInclusion(t *testing.T) {
 	p := structures.Params{
-		Includes: []string{"A", "B", "C"},
+		Yellows: []string{"A", "B", "C", "_", "_"},
 	}
 
-	assert.True(t, hasYellows("ABCXX", p))
-	assert.False(t, hasYellows("ABXXX", p))
+	assert.True(t, hasYellows("XABCX", p))
+	assert.False(t, hasYellows("ABCXX", p))
 	assert.False(t, hasYellows("AXXXX", p))
 	assert.True(t, hasYellows("XXABC", p))
 	assert.True(t, hasYellows("XCXBA", p))
@@ -41,7 +30,7 @@ func TestInclusion(t *testing.T) {
 
 func TestExclusion(t *testing.T) {
 	p := structures.Params{
-		Excludes: []string{"A", "B", "C"},
+		Greys: []string{"A", "B", "C"},
 	}
 
 	assert.False(t, hasNoGreys("ABCXX", p))
@@ -54,21 +43,19 @@ func TestExclusion(t *testing.T) {
 
 func TestFindCandidates(t *testing.T) {
 	p := structures.Params{
-		LetterOne:  "A",
-		LetterTwo:  "",
-		LetterFive: "E",
+		Greens: []string{"A", "_", "_", "_", "E"},
 	}
 	candidates := findAllCandidates(p)
 
-	assert.True(t, contains("ABELE", candidates))
-	assert.False(t, contains("SLIVE", candidates))
-	assert.True(t, contains("AGLEE", candidates))
-	assert.True(t, contains("AGAVE", candidates))
-	assert.False(t, contains("AGAIN", candidates))
+	assert.True(t, Contains("ABELE", candidates))
+	assert.False(t, Contains("SLIVE", candidates))
+	assert.True(t, Contains("AGLEE", candidates))
+	assert.True(t, Contains("AGAVE", candidates))
+	assert.False(t, Contains("AGAIN", candidates))
 }
 
 func TestPickRandomWord(t *testing.T) {
 	words := []string{"THIS", "THAT", "OTHER"}
 	randomChoice := pickRandomWord(words)
-	assert.True(t, contains(randomChoice, words))
+	assert.True(t, Contains(randomChoice, words))
 }

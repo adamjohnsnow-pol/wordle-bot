@@ -1,11 +1,18 @@
 package structures
 
 type Params struct {
-	LetterOne   string
-	LetterTwo   string
-	LetterThree string
-	LetterFour  string
-	LetterFive  string
-	Includes    []string
-	Excludes    []string
+	Greens      []string
+	Yellows     []string
+	Greys       []string
+	Emoji       []string
+	PlayedWords []string
+	Turns       int
+}
+
+func New() Params {
+	return Params{
+		Greens:  []string{"_", "_", "_", "_", "_"},
+		Yellows: []string{"_", "_", "_", "_", "_"},
+		Emoji:   []string{"X", "X", "X", "X", "X"},
+	}
 }
